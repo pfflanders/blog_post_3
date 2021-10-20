@@ -63,18 +63,18 @@ def ask():
 # File uploads and interfacing with complex Python
 # basic version
 
-@app.route('/submitdemo/', methods=['POST', 'GET'])
-def submitDemo():
+@app.route('/submit-basic/', methods=['POST', 'GET'])
+def submit_basic():
     if request.method == 'GET':
-        return render_template('submit.html')
+        return render_template('submit-basic.html')
     else:
         try:
-            return render_template('submit.html', thanks = True)
+            return render_template('submit-basic.html', thanks = True)
         except:
-            return render_template('submit.html', error=True)
+            return render_template('submit-basic.html', error=True)
 
 # nontrivial version: makes a prediction and shows a viz
-@app.route('/submit/', methods=['POST', 'GET'])
+@app.route('/submit-advanced/', methods=['POST', 'GET'])
 def submit():
     if request.method == 'GET':
         return render_template('submit.html')
@@ -99,6 +99,9 @@ def submit():
             
             # in order to show the plot on flask, we need to do a few tricks
             # Convert plot to PNG image
+            # need to: 
+            # import io 
+            # import base64 
             pngImage = io.BytesIO()
             FigureCanvas(fig).print_png(pngImage)
             
@@ -106,6 +109,7 @@ def submit():
             pngImageB64String = "data:image/png;base64,"
             pngImageB64String += base64.b64encode(pngImage.getvalue()).decode('utf8')
             
+            # finally we can render the template with the prediction and image
             return render_template('submit.html', digit=d, image=pngImageB64String)
         except:
             return render_template('submit.html', error=True)
