@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Messages List{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  This list contains a bunch of bologna.
+  <ul>
+  {% for message in messages %}
+  <li>{{message}}</a></li>
+  {% endfor %}
+  </ul>
+{% endblock %}

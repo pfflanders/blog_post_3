@@ -12,7 +12,7 @@ import string
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 def get_auth_db():
-    if 'db' not in g:
+    if 'auth_db' not in g:
         g.auth_db = sqlite3.connect('users.sqlite')
 
     return g.auth_db
