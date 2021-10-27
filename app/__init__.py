@@ -4,20 +4,11 @@
 
 from flask import Flask, g, render_template, request
 
-import sklearn as sk
-import matplotlib.pyplot as plt
-import numpy as np
-import pickle
-
-from .housewares import housewares_bp, close_hw_db
 from .auth import auth_bp, close_auth_db, init_auth_db_command
 from .messages import messages_bp, close_message_db
 
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
-
-import io
-import base64
 
 
 # Create web app, run with flask run
@@ -28,17 +19,6 @@ app = Flask(__name__)
 # Create main page (fancy)
 
 @app.route('/')
-
-# def main():
-#     return render_template("main.html")
-
-# comment out the below to focus on just the fundamentals
-
-# after running
-# $ export FLASK_ENV=development; flask run
-# site will be available at 
-# http://localhost:5000
-
 def main():
     return render_template('main_better.html')
 
