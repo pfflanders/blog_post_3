@@ -50,24 +50,28 @@ def survey():
         print('got a post request for survey')
         try:
             insert_message(request)
-            render_template('submit.html')
+            return render_template('submit.html')
         except:
             print('error in submitting survey')
             return render_template('submit.html', error=True)
 
+def random_messages(n):
+    result = []
+    db = get_message_db()
+    c = db.cursor()
+    length = c.execute("SELECT COUNT(id) FROM messages").fetchone()[0] + 1 
+    results = c.execute(f"SELECT * FROM messages ORDER BY RANDOM() LIMIT {min(n, length, 5)}").fetchall()
+    print('sql method in view exectued succuessfully')
+    return results
+        
 
 @messages_bp.route('/view/', methods=['GET']) 
 def view():
     print('enter view method')
     try:
-        result = []
-        db = get_message_db()
-        c = db.cursor()
-        c.execute("SELECT * FROM messages")
-        names = [elem[1] for elem in c.fetchall()]
-        messages = [elem[2] for elem in c.fetchall()]
-        print('sql method in view exectued succuessfully')
-        print(names, messages)
+        results = random_messages(5)
+        names = [elem[1] for elem in results]
+        messages = [elem[2] for elem in results]
         return render_template('list.html', names=names, messages=messages)
     except:
         print('error in /view/')

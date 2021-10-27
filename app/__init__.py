@@ -4,7 +4,7 @@
 
 from flask import Flask, g, render_template, request
 
-from .auth import auth_bp, close_auth_db, init_auth_db_command
+# from .auth import auth_bp, close_auth_db, init_auth_db_command
 from .messages import messages_bp, close_message_db
 
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
@@ -60,8 +60,8 @@ app.teardown_appcontext(close_message_db)
 
 # Sessions and logging in
 
-app.secret_key = b'h\x13\xce`\xd9\xde\xbex\xbd\xc3\xcc\x07\x04\x08\x88~'
+# app.secret_key = b'h\x13\xce`\xd9\xde\xbex\xbd\xc3\xcc\x07\x04\x08\x88~'
 
-app.register_blueprint(auth_bp)
-app.teardown_appcontext(close_auth_db)
-app.cli.add_command(init_auth_db_command) # run with flask init-auth-db
+# app.register_blueprint(auth_bp)
+# app.teardown_appcontext(close_auth_db)
+# app.cli.add_command(init_auth_db_command) # run with flask init-auth-db
