@@ -1,6 +1,11 @@
+@font-face{
+    font-family: Ink;
+    src: url('Inkfree.ttf');
+}
+
 html {
-    font-family: sans-serif;
-    background: AntiqueWhite;
+    font-family: Ink;
+    background: #ffe9f3;
     padding: 1rem;
 }
 
@@ -11,37 +16,41 @@ body {
 
 h1 {
     color: rgb(0, 0, 0);
-    font-family: sans-serif;
+    font-family: Arial;
     margin: 1rem 0;
     text-align: center;
 }
 
 a {
-    color: CornflowerBlue;
+    color: #512d38;
     text-decoration: none;
 }
 
 hr {
-    border: none;
-    border-top: 1px solid lightgray;
+    border: 2px;
+    text-align: center;
 }
 
 nav {
-    background: AntiqueWhite;
+    background: #B27092;
     padding: 0 0.5rem;
     border-radius: 25px;
+    text-align: center;
 }
 
 nav ul  {
     display: flex;
+    justify-content: space-between;
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 1px;
 }
 
 nav ul li a {
     display: block;
     padding: 0.5rem;
+    text-shadow: 2px 2px #512d38;
+    color: #ffe9f3
 }
 
 .content {

@@ -39,29 +39,6 @@ def ask():
             return render_template('ask.html', name=request.form['name'], student=request.form['student'])
         except:
             return render_template('ask.html')
-
-
-# @app.route('/submit/', methods=['POST', 'GET'])
-# def submit():
-#     if request.method == 'GET':
-#         return render_template('submit.html')
-#     else:
-#         try:
-#             # retrieve the image
-#             message = request.files['message']
-
-
-#             return render_template('submit.html')
-#         except:
-#             return render_template('submit.html', error=True)
-        
+   
 app.register_blueprint(messages_bp)
 app.teardown_appcontext(close_message_db)
-
-# Sessions and logging in
-
-# app.secret_key = b'h\x13\xce`\xd9\xde\xbex\xbd\xc3\xcc\x07\x04\x08\x88~'
-
-# app.register_blueprint(auth_bp)
-# app.teardown_appcontext(close_auth_db)
-# app.cli.add_command(init_auth_db_command) # run with flask init-auth-db

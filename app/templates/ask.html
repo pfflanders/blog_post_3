@@ -6,7 +6,7 @@
 
 {% block content %}
   <form method="post">
-      <label for="name">What would you like us to call you?</label>
+      <label for="name" spellcheck="false">What would you like us to call you?</label>
       <input name="name" id="name">
       <br>
       <label for="pic16b">Are you in PIC16B?</label>
@@ -20,9 +20,9 @@
   {% if name %}
   <br>
   {% if student == "yes" %}
-  <b>Hello {{name}}!  Do you like PIC16B?</b>
+  <b>Hello {{name}}!  I hope you're enjoying the class! </b>
   {% else %}
-  <b>Hello {{name}}!  Do you want to take PIC16B?</b>
+  <b>Hello {{name}}!  I highly recommend this class! </b>
   {% endif %}
   {% endif %}
 {% endblock %}

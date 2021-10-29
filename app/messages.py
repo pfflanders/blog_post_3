@@ -26,11 +26,9 @@ def insert_message(request):
     message = request.form["message"]
     print(f"name is {name} and message is {message}")
 
-    length = c.execute("SELECT COUNT(id) FROM messages").fetchone()[0]
-    print(f'length is {length}')
-
     sql = f"""
-    INSERT INTO messages VALUES({length+1}, '{name}', '{message}');
+    INSERT INTO messages (handle, message)
+    VALUES ('{name}','{message}');
     """
     print(sql)
     
@@ -59,20 +57,24 @@ def random_messages(n):
     result = []
     db = get_message_db()
     c = db.cursor()
-    length = c.execute("SELECT COUNT(id) FROM messages").fetchone()[0] + 1 
-    results = c.execute(f"SELECT * FROM messages ORDER BY RANDOM() LIMIT {min(n, length, 5)}").fetchall()
-    print('sql method in view exectued succuessfully')
+    try: 
+        length = c.execute("SELECT COUNT(id) FROM messages").fetchone()[0] + 1 
+        results = c.execute(f"SELECT * FROM messages ORDER BY RANDOM() LIMIT {min(n, length, 5)}").fetchall()
+    except:
+        results = None
     return results
         
 
 @messages_bp.route('/view/', methods=['GET']) 
 def view():
-    print('enter view method')
     try:
         results = random_messages(5)
-        names = [elem[1] for elem in results]
-        messages = [elem[2] for elem in results]
-        return render_template('list.html', names=names, messages=messages)
+        if results:
+            names = [elem[1] for elem in results]
+            messages = [elem[2] for elem in results]
+            return render_template('list.html', names=names, messages=messages)
+        else:
+            return render_template('main_better.html', error=True)
     except:
         print('error in /view/')
-        return render_template('list.html', error=True)
+        return render_template('main_better.html', error=True)
